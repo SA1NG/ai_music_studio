@@ -1,0 +1,122 @@
+/* Responsive studio layout. Scope component styling to our own elem_classes. */
+/* The Gradio root clips overflow by default, which prevents sticky headings. */
+gradio-app > :has(.studio-shell), .studio-shell, .studio-workspace, .workspace-tabs,
+.workspace-tabs > [role="tabpanel"] { overflow: visible !important; }
+.page-heading:not(.page-heading .page-heading) {
+  position: sticky !important;
+  top: 0;
+  z-index: 45;
+  background: #0b0b0f !important;
+  padding: 12px 0 !important;
+  border-bottom: 1px solid var(--line);
+  box-sizing: border-box;
+  border-radius: 0 !important;
+}
+/* Markdown repeats elem_classes on its inner content; only the outer block sticks. */
+.page-heading .page-heading {
+  position: static !important;
+  z-index: auto;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+.studio-shell { box-sizing: border-box; width: 100%; padding-left: 230px; gap: 0 !important; }
+.studio-sidebar { position: fixed !important; top: 24px; bottom: 180px;
+  left: max(16px, calc((100vw - 1640px) / 2)); width: 210px !important;
+  min-width: 0 !important; min-height: 0 !important; overflow-y: auto;
+  background: #0b0b0f; box-sizing: border-box; }
+.studio-workspace { width: 100%; min-width: 0 !important; padding: 16px 0 0 !important; }
+.workspace-tabs > [role="tablist"] { display: none !important; }
+.sidebar-navigation, .sidebar-navigation div, .sidebar-navigation fieldset {
+  background: transparent !important; border: 0 !important; box-shadow: none !important;
+}
+.studio-sidebar :has(> .sidebar-navigation) { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+.studio-sidebar .sidebar-navigation div:has(> label) { display: flex; flex-direction: column; gap: 8px; }
+.sidebar-navigation label { background: transparent !important; border: 1px solid transparent !important;
+  border-left: 3px solid transparent !important; box-shadow: none !important; }
+.sidebar-navigation label:hover { background: rgba(255,255,255,.035) !important; }
+.sidebar-navigation label:focus-within { outline: none; }
+.sidebar-navigation label:has(input:focus-visible) { outline: 2px solid var(--accent-a); outline-offset: 2px; }
+.studio-sidebar .sidebar-navigation label:has(input:checked) { background: rgba(255,79,139,.10) !important;
+  border-color: transparent !important; border-left-color: var(--accent-a) !important; color: #ff9dbe !important; }
+.create-layout { gap: 20px !important; align-items: flex-start !important; }
+.create-panel, .create-results { box-sizing: border-box; max-width: 100%; }
+.create-results { gap: 14px !important; }
+.create-action { width: 100% !important; min-height: 54px; border-radius: 14px !important; }
+.create-action:disabled { opacity: .65; cursor: wait; }
+.model-select { width: 100%; }
+.adapter-note { font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.model-settings, .generation-settings-row { gap: 12px !important; }
+.generation-settings { width: 100%; box-sizing: border-box; }
+.generation-status { overflow-wrap: anywhere; }
+.label-step, .label-review-layout, .label-review-layout > * { min-width: 0 !important; max-width: 100%; }
+.label-approved-tracks { overflow-wrap: anywhere; }
+.audio-validation-note { min-width: 0 !important; max-width: 100%; overflow-wrap: anywhere; }
+.audio-validation-note table { width: 100%; table-layout: fixed; }
+.audio-validation-note th, .audio-validation-note td { white-space: normal; overflow-wrap: anywhere; }
+@media (max-width: 699px) {
+  .label-review-layout { flex-direction: column !important; }
+  .label-review-layout > * { width: 100%; flex: 1 1 auto !important; }
+}
+.music-metadata { gap: 10px !important; flex-wrap: wrap !important; }
+.music-metadata > *, .source-settings, .advanced-generation { min-width: 0 !important; max-width: 100%; }
+@media (max-width: 699px) {
+  .music-metadata { flex-direction: column !important; }
+  .music-metadata > * { width: 100% !important; flex: 1 1 auto !important; }
+}
+.pills div:has(> label) { background: transparent !important; display: flex; flex-wrap: wrap; gap: 6px; }
+.prompt-input textarea { box-sizing: border-box; width: 100%; }
+.studio-workspace [role="tabpanel"] { min-width: 0 !important; max-width: 100%; }
+.studio-workspace .lib-bar { flex-wrap: wrap !important; }
+.studio-workspace .lib-bar .seg { min-width: 0 !important; max-width: 100%; }
+.player-bar { width: 100% !important; max-width: 100vw !important; box-sizing: border-box; }
+.player-bar .now-cell { min-width: 0 !important; max-width: 100%; }
+.player-bar .audio { min-width: 0 !important; max-width: 100%; }
+
+@media (min-width: 700px) and (max-width: 1099px) {
+  .studio-shell { padding-left: 80px; gap: 0 !important; }
+  .studio-sidebar { left: 8px; width: 64px !important; padding: 12px 4px !important; }
+  .studio-sidebar .brand { justify-content: center; }
+  .studio-sidebar .brand b, .studio-sidebar .brand .sub,
+  .sidebar-caption, .sidebar-note { display: none !important; }
+  .sidebar-navigation label { padding: 14px 0 !important; text-align: center; }
+  .sidebar-navigation label, .sidebar-navigation label span { font-size: 0 !important; }
+  .sidebar-navigation label::before { font-size: 20px; line-height: 24px; }
+  .sidebar-navigation label:nth-of-type(1)::before { content: "✦"; }
+  .sidebar-navigation label:nth-of-type(2)::before { content: "♫"; }
+  .sidebar-navigation label:nth-of-type(3)::before { content: "🏷"; }
+  .sidebar-navigation label:nth-of-type(4)::before { content: "◈"; }
+  .sidebar-navigation label:nth-of-type(5)::before { content: "⚙"; }
+  .create-layout { gap: 14px !important; }
+}
+
+@media (max-width: 699px) {
+  .studio-shell { padding-left: 0; flex-direction: column !important; gap: 14px !important; }
+  .studio-sidebar { position: sticky !important; left: auto; top: 0; bottom: auto;
+    width: 100% !important; flex: 0 0 auto !important; padding: 8px 0 !important;
+    gap: 0 !important; border-right: 0; border-bottom: 1px solid var(--line); z-index: 46; overflow: visible; }
+  .studio-sidebar .brand, .sidebar-caption, .sidebar-note { display: none !important; }
+  .studio-sidebar .sidebar-navigation div:has(> label) { flex-direction: row !important; flex-wrap: nowrap !important; gap: 2px !important; }
+  .sidebar-navigation label { flex: 1 1 0; width: 0 !important; min-width: 0 !important;
+    padding: 10px 2px !important; text-align: center; border-radius: 8px !important;
+    border-left: 0 !important; border-bottom: 2px solid transparent !important;
+    font-size: 10px !important; overflow-wrap: anywhere; }
+  .studio-sidebar .sidebar-navigation label:has(input:checked) { border-left: 0 !important; border-bottom-color: var(--accent-a) !important; }
+  .studio-workspace { width: 100% !important; flex: 1 1 auto !important; padding: 0 !important; }
+  .create-layout, .generation-settings-row { flex-direction: column !important; }
+  .create-panel, .create-results { min-width: 0 !important; width: 100% !important; flex: 1 1 auto !important; }
+  .generation-settings-row > * { width: 100%; min-width: 0 !important; box-sizing: border-box; }
+  .page-heading h2 { font-size: 24px !important; }
+  .page-heading:not(.page-heading .page-heading) {
+    margin-bottom: 8px !important;
+    top: var(--studio-navigation-height, 64px);
+  }
+  .player-bar { flex-wrap: wrap !important; gap: 4px !important; padding: 8px !important; }
+  .player-bar > .now-cell { flex: 1 1 100% !important; }
+  .player-bar > .audio { flex: 1 1 100% !important; }
+  .player-bar .now .m { font-size: 11px; }
+  .song-card { gap: 6px !important; flex-wrap: wrap !important; }
+  .song-card > .info-cell { flex-basis: calc(100% - 70px) !important; }
+  .lib-bar .seg div:has(> label) { flex-wrap: wrap !important; width: 100% !important; }
+}
